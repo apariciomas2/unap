@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int array[]  = {4, 2, 2, 8, 3, 3, 1};
+    int n = sizeof(array) / sizeof(array[0]);
+	int k = 8;  
+//__________________________________	   
+	   
+	int cont[k + 1] = {0};
+    int aux[n];
+
+    for (int i = 0; i < n; i++)
+        cont[array[i]]++;
+
+    for (int i = 1; i <= k; i++)
+        cont[i] += cont[i - 1];
+
+    for (int i = n - 1; i >= 0; i--) {
+        aux[cont[array[i]] - 1] = array[i];
+        cont[array[i]]--;
+    }
+
+    for (int i = 0; i < n; i++)
+        array[i] = aux[i];
+//__________________________________
+    cout << "Lista ordenada: ";
+    for (int i = 0; i < n; i++)
+        cout << array[i] << " ";
+
+    return 0;
+}
